@@ -92,8 +92,9 @@ Use any of the following commands to achieve the desired results:
 #+findex: altcaps-region
 - ~altcaps-region~ :: Convert region words between =BEG= and =END= to
   alternating case.  =BEG= and =END= are buffer positions.  When
-  called interactively, these are automatically determined as active
-  region's boundaries, else the space between ~mark~ and ~point~.
+  called interactively, these are automatically determined as the
+  active region's boundaries, else the space between ~mark~ and
+  ~point~.
 
 #+findex: altcaps-dwim
 - ~altcaps-dwim~ :: Convert to alternating letter casing

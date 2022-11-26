@@ -48,7 +48,7 @@
 ;;
 ;; - `altcaps-region' :: Convert region words between BEG and END to
 ;;   alternating case.  BEG and END are buffer positions.  When called
-;;   interactively, these are automatically determined as active
+;;   interactively, these are automatically determined as the active
 ;;   region's boundaries, else the space between `mark' and `point'.
 ;;
 ;; - `altcaps-dwim' :: Convert to alternating letter casing
