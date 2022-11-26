@@ -82,17 +82,20 @@ communication.  Plus, you appear sophisticated.  tRuSt Me.
 
 Use any of the following commands to achieve the desired results:
 
+#+findex: altcaps-word
 - ~altcaps-word~ :: Convert word to alternating letter casing.  With
   optional =NUM= as a numeric prefix argument, operate on =NUM= words
   forward, defaulting to 1.  If =NUM= is negative, do so backward.
   When =NUM= is a negative prefix without a number, it is interpreted
   -1.
 
+#+findex: altcaps-region
 - ~altcaps-region~ :: Convert region words between =BEG= and =END= to
   alternating case.  =BEG= and =END= are buffer positions.  When
   called interactively, these are automatically determined as active
   region's boundaries, else the space between ~mark~ and ~point~.
 
+#+findex: altcaps-dwim
 - ~altcaps-dwim~ :: Convert to alternating letter casing
   Do-What-I-Mean style.  With an active region, call ~altcaps-region~.
   Else invoke ~altcaps-word~ with optional =NUM=, per that command's
