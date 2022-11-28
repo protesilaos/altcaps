@@ -69,7 +69,7 @@
 ;;     iLlIcIt IlLiBeRaL sIlLiNeSs
 ;;
 ;; Whereas if the value of this variable declares `i' to always be
-;; lower case and `L' uppercase, then we get this:
+;; lowercase and `L' uppercase, then we get this:
 ;;
 ;;     iLLiCiT iLLiBeRaL siLLiNeSs
 ;;
@@ -112,7 +112,7 @@ example, the default altcaps algorithm produces this:
     iLlIcIt IlLiBeRaL sIlLiNeSs
 
 Whereas if the value of this variable declares `i' to always be
-lower case and `L' uppercase, then we get this (check the manual
+lowercase and `L' uppercase, then we get this (check the manual
 for a code sample):
 
     iLLiCiT iLLiBeRaL siLLiNeSs

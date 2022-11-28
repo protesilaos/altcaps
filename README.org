@@ -117,8 +117,8 @@ the default altcaps algorithm produces this:
 
 : iLlIcIt IlLiBeRaL sIlLiNeSs
 
-Whereas if the value of this variable declares =i= to always be lower
-case and =L= uppercase, then we get this:
+Whereas if the value of this variable declares =i= to always be
+lowercase and =L= uppercase, then we get this:
 
 : iLLiCiT iLLiBeRaL siLLiNeSs
 
