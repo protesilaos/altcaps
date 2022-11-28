@@ -56,6 +56,29 @@
 ;;   `altcaps-region'.  Else invoke `altcaps-word' with optional NUM,
 ;;   per that command's functionality (read its documentation).
 ;;
+;; The user option `altcaps-force-character-casing' forces the given
+;; letter casing for specified characters.  Its value is an alist of
+;; (CHARACTER . CASE) pairs.  CHARACTER is a single character
+;; (satisfies the `characterp' condition), while CASE is the `upcase'
+;; or `downcase' symbol (code sample further below).
+;;
+;; The idea is to always render certain characters in lower or upper
+;; case, in consideration of their legibility in context.  For
+;; example, the default altcaps algorithm produces this:
+;;
+;;     iLlIcIt IlLiBeRaL sIlLiNeSs
+;;
+;; Whereas if the value of this variable declares `i' to always be
+;; lower case and `L' uppercase, then we get this:
+;;
+;;     iLLiCiT iLLiBeRaL siLLiNeSs
+;;
+;; The code to do this:
+;;
+;;     (setq altcaps-force-character-casing
+;;           '((?i . downcase)
+;;             (?l . upcase)))
+;;
 ;; Backronyms of ALTCAPS: Alternating Letters Transform Casual Asides
 ;; to Playful Statements.  ALTCAPS Lets Trolls Convert Aphorisms to
 ;; Proper Shitposts.
@@ -77,6 +100,33 @@ The `altcaps' package thus makes you more effective at textual
 communication.  Plus, you appear more sophisticated.  tRuSt Me."
   :group 'editing)
 
+(defcustom altcaps-force-character-casing nil
+  "Force the given letter casing for specified characters.
+This is an alist of (CHARACTER . CASE).  CHARACTER must satisfy
+`characterp', while CASE is the symbol `upcase' or `downcase'.
+
+The idea is to always render certain characters in lower or upper
+case, in consideration of their legibility in context.  For
+example, the default altcaps algorithm produces this:
+
+    iLlIcIt IlLiBeRaL sIlLiNeSs
+
+Whereas if the value of this variable declares `i' to always be
+lower case and `L' uppercase, then we get this (check the manual
+for a code sample):
+
+    iLLiCiT iLLiBeRaL siLLiNeSs
+
+You do want to communicate mockery or sarcasm, though legibility
+still matters!  (Though I encourage everyone to use a decent font
+that disambiguates characters.)"
+  :type '(alist
+          :key-type (character :tag "Single character")
+          :value-type (radio :tag "Letter casing"
+                             (const :tag "Lower case" downcase)
+                             (const :tag "Upper case" upcase)))
+  :group 'altcaps)
+
 (defun altcaps--transform (string)
   "Make STRING use alternating letter casing."
   (let ((s (vconcat (downcase string)))
@@ -84,11 +134,16 @@ communication.  Plus, you appear more sophisticated.  tRuSt Me."
         chars)
     (mapc (lambda (c)
             (unless (string-blank-p (char-to-string c))
-              (if (eq casing 'down)
-                  (setq c (upcase c)
-                        casing 'up)
+              (cond
+               ((when-let ((force-case (alist-get c altcaps-force-character-casing)))
+                  (setq c (funcall force-case c)
+                        casing force-case)))
+               ((eq casing 'downcase)
+                (setq c (upcase c)
+                      casing 'upcase))
+               (t
                 (setq c (downcase c)
-                      casing 'down)))
+                      casing 'downcase))))
             (push c chars))
           s)
     (concat (reverse chars))))
