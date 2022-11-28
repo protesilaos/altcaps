@@ -6,7 +6,7 @@
 ;; Maintainer: Altcaps Development <~protesilaos/altcaps@lists.sr.ht>
 ;; URL: https://git.sr.ht/~protesilaos/altcaps
 ;; Mailing-List: https://lists.sr.ht/~protesilaos/altcaps
-;; Version: 1.0.0
+;; Version: 1.1.0
 ;; Package-Requires: ((emacs "27.1"))
 
 ;; This file is NOT part of GNU Emacs.

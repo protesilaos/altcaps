@@ -1,0 +1,68 @@
+#+title: Change log of aLtCaPs
+#+author: Protesilaos Stavrou
+#+email: info@protesilaos.com
+#+options: ':nil toc:nil num:nil author:nil email:nil
+
+This document contains the release notes for each tagged commit on the
+project's main git repository: <https://git.sr.ht/~protesilaos/altcaps>.
+
+The newest release is at the top.  For further details, please consult
+the manual: <https://protesilaos.com/emacs/altcaps>.
+
+* 1.1.0 on 2022-11-28
+:PROPERTIES:
+:CUSTOM_ID: h:f1e70ccd-ad8d-44ee-a061-006f63ec07ef
+:END:
+
+** New user option
+:PROPERTIES:
+:CUSTOM_ID: h:21b37c23-b4ad-4531-ac20-2ddcce74d26f
+:END:
+
+Introduced the user option ~altcaps-force-character-casing~.  It
+forces the given letter casing for specified characters.  Its value is
+an alist of =(CHARACTER . CASE)= pairs.  =CHARACTER= is a single
+character (satisfies the ~characterp~ condition), while =CASE= is the
+~upcase~ or ~downcase~ symbol (code sample further below).
+
+The idea is to always render certain characters in lower or upper
+case, in consideration of their legibility in context.  For example,
+the default altcaps algorithm produces this:
+
+: iLlIcIt IlLiBeRaL sIlLiNeSs
+
+Whereas if the value of this variable declares =i= to always be
+lowercase and =L= uppercase, then we get this:
+
+: iLLiCiT iLLiBeRaL siLLiNeSs
+
+The code to do this:
+
+#+begin_src emacs-lisp
+(setq altcaps-force-character-casing
+      '((?i . downcase)
+        (?l . upcase)))
+#+end_src
+
+Thanks to Cédric Barreteau for the idea of forcing a given letter case
+on specified characters.  I think that giving users the option keeps
+our code simple, while providing a useful point of customisation.
+
+Cédric is the author of the nvim-altcaps, which is a plugin for NeoVim
+based on my =altcaps= idea: <https://github.com/cbarrete/nvim-altcaps>.
+
+** Improvements to documentation
+:PROPERTIES:
+:CUSTOM_ID: h:87713c33-c2d8-4d33-912e-8fd1cd54a58c
+:END:
+
++ Wrote a =README.md= which contains basic information about the
+  project, including links to the official Git repos, its mirrors on
+  GitHub/GitLab, as well as the project's mailing list.  This file is
+  useful for Git forges that have trouble parsing an Org file (the
+  manual is =README.org=, which the GNU ELPA machinery converts into a
+  proper Info manual).
++ Added missing index entries to the manual for our commands and the
+  new user option.
++ Wrote this very =CHANGELOG.org=, which is helpful for those who
+  inspect the Git repository.
