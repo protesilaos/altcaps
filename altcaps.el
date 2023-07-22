@@ -150,8 +150,8 @@ that disambiguates characters.)"
 
 (defun altcaps-replace (string &optional start)
   "Convert STRING n buffer to alternating letter casing.
-With optional START, use it as a buffer position from whence to
-make the replacement."
+With optional START, use it as a buffer position whence to make
+the replacement."
   (when start (goto-char start))
   (when (search-forward string nil t)
     (replace-match (altcaps--transform string) t)))
