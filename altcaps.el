@@ -127,7 +127,7 @@ that disambiguates characters.)"
                              (const :tag "Upper case" upcase)))
   :group 'altcaps)
 
-(defun altcaps--transform (string)
+(defun altcaps-transform (string)
   "Make STRING use alternating letter casing."
   (let ((s (vconcat (downcase string)))
         casing
@@ -154,7 +154,7 @@ With optional START, use it as a buffer position whence to make
 the replacement."
   (when start (goto-char start))
   (when (search-forward string nil t)
-    (replace-match (altcaps--transform string) t)))
+    (replace-match (altcaps-transform string) t)))
 
 ;;;###autoload
 (defun altcaps-word (&optional num)
