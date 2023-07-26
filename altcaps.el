@@ -149,7 +149,7 @@ that disambiguates characters.)"
     (concat (reverse chars))))
 
 (defun altcaps-replace (string &optional start)
-  "Convert STRING n buffer to alternating letter casing.
+  "Convert STRING in buffer to alternating letter casing.
 With optional START, use it as a buffer position whence to make
 the replacement."
   (when start (goto-char start))
