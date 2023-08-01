@@ -133,7 +133,7 @@ font that disambiguates characters.)"
         casing
         chars)
     (mapc (lambda (c)
-            (unless (string-match-p "[[:punct:][:blank:]]" (char-to-string c))
+            (when (string-match-p "[[:alpha:]]" (char-to-string c))
               (cond
                ((when-let ((force-case (alist-get c altcaps-force-character-casing)))
                   (setq c (funcall force-case c)
