@@ -128,7 +128,9 @@ font that disambiguates characters.)"
   :group 'altcaps)
 
 (defun altcaps-transform (string)
-  "Make STRING use alternating letter casing, ignoring blanks."
+  "Make STRING use alternating letter casing, ignoring blanks.
+Respect the preferred casing for characters in the user option
+`altcaps-force-character-casing'."
   (let ((s (split-string (downcase string) ""))
         casing
         chars)
