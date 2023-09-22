@@ -129,13 +129,13 @@ font that disambiguates characters.)"
 
 (defun altcaps-transform (string)
   "Make STRING use alternating letter casing, ignoring blanks."
-  (let ((s (vconcat (downcase string)))
+  (let ((s (split-string (downcase string) ""))
         casing
         chars)
     (mapc (lambda (c)
-            (when (string-match-p "[[:alpha:]]" (char-to-string c))
+            (when (string-match-p "[[:alpha:]]" c)
               (cond
-               ((when-let ((force-case (alist-get c altcaps-force-character-casing)))
+               ((when-let ((force-case (alist-get c altcaps-force-character-casing nil nil #'equal)))
                   (setq c (funcall force-case c)
                         casing force-case)))
                ((eq casing 'downcase)
@@ -146,7 +146,7 @@ font that disambiguates characters.)"
                       casing 'downcase))))
             (push c chars))
           s)
-    (concat (reverse chars))))
+    (apply #'concat (nreverse chars))))
 
 (defun altcaps-replace (string &optional start)
   "Convert STRING in buffer to alternating letter casing.
