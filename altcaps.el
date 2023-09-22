@@ -58,9 +58,9 @@
 ;;
 ;; The user option `altcaps-force-character-casing' forces the given
 ;; letter casing for specified characters.  Its value is an alist of
-;; (CHARACTER . CASE) pairs.  CHARACTER is a single character
-;; (satisfies the `characterp' condition), while CASE is the `upcase'
-;; or `downcase' symbol (code sample further below).
+;; (STRING . CASE) pairs.  STRING is a single character string, while
+;; CASE is the `upcase' or `downcase' symbol (code sample further
+;; below).
 ;;
 ;; The idea is to always render certain characters in lower or upper
 ;; case, in consideration of their legibility in context.  For
@@ -76,8 +76,8 @@
 ;; The code to do this:
 ;;
 ;;     (setq altcaps-force-character-casing
-;;           '((?i . downcase)
-;;             (?l . upcase)))
+;;           '(("i" . downcase)
+;;             ("l" . upcase)))
 ;;
 ;; Backronyms of ALTCAPS: Alternating Letters Transform Casual Asides
 ;; to Playful Statements.  ALTCAPS Lets Trolls Convert Aphorisms to
