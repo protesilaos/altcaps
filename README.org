@@ -102,8 +102,6 @@ Use any of the following commands to achieve the desired results:
   Else invoke ~altcaps-word~ with optional =NUM=, per that command's
   functionality (read its documentation).
 
-[ The following is part of {{{development-version}}}. ]
-
 #+vindex: altcaps-force-character-casing
 The user option ~altcaps-force-character-casing~ forces the given
 letter casing for specified characters.  Its value is an alist of
