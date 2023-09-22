@@ -2,7 +2,7 @@
 
 The `altcaps` package is a small, focused-in-scope tool that helps
 users communicate mockery or sarcasm effectively.  It does this by
-alternating the letter casing of the words it affects.
+alternating the letter casing of characters in the words it affects.
 
 + Package name (GNU ELPA): `altcaps`
 + Official manual: <https://protesilaos.com/emacs/altcaps>
