@@ -148,13 +148,14 @@ font that disambiguates characters.)"
           s)
     (apply #'concat (nreverse chars))))
 
-(defun altcaps-replace (string &optional start)
-  "Convert STRING in buffer to alternating letter casing.
-With optional START, use it as a buffer position whence to make
-the replacement."
-  (when start (goto-char start))
-  (when (search-forward string nil t)
-    (replace-match (altcaps-transform string) t)))
+(defun altcaps-replace-region (beginning end string)
+  "Replace region between BEGINNING and END with STRING.
+STRING is processed with `altcaps-transform'."
+  (goto-char beginning)
+  (delete-region beginning end)
+  (insert (altcaps-transform string)))
+
+(make-obsolete 'altcaps-replace 'altcaps-replace-region "1.2.0")
 
 ;;;###autoload
 (defun altcaps-word (&optional num)
@@ -163,19 +164,22 @@ the replacement."
 With optional NUM as a numeric prefix argument, operate on NUM
 words forward, defaulting to 1.  If NUM is negative, do so
 backward.  When NUM is a negative prefix without a number, it is
-interpreted -1.
+interpreted as -1.
 
 Alternating letter casing denotes sarcasm or mockery."
   (interactive "P")
   (let* ((n (cond
-              ((integerp num) num)
-              ((eq num '-) -1)
-              (t 1)))
+             ((integerp num) num)
+             ((eq num '-) -1)
+             (t 1)))
+         (beginning (point))
          (end (save-excursion (forward-word n) (point)))
-         (word (buffer-substring-no-properties (point) end))
-         (start (when (< end (point)) end)))
-    (unless (string-blank-p word)
-      (altcaps-replace word start))))
+         (original-word (buffer-substring-no-properties beginning end)))
+    (unless (string-blank-p original-word)
+      (altcaps-replace-region
+       (min beginning end)
+       (max beginning end)
+       original-word))))
 
 ;;;###autoload
 (defun altcaps-region (beg end)
@@ -186,7 +190,7 @@ boundaries, else the space between `mark' and `point'.
 
 Alternating letter casing denotes sarcasm or mockery."
   (interactive "r")
-  (altcaps-replace (buffer-substring-no-properties beg end) beg))
+  (altcaps-replace-region beg end (buffer-substring-no-properties beg end)))
 
 ;;;###autoload
 (defun altcaps-dwim (&optional num)
