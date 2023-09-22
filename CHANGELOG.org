@@ -9,6 +9,106 @@ project's main git repository: <https://git.sr.ht/~protesilaos/altcaps>.
 The newest release is at the top.  For further details, please consult
 the manual: <https://protesilaos.com/emacs/altcaps>.
 
+* 1.2.0 on 2023-09-22
+:PROPERTIES:
+:CUSTOM_ID: h:f6bf4cd9-0942-4536-92bc-6117cd5d57d9
+:END:
+
+** Breaking change to the value of ~altcaps-force-character-casing~
+:PROPERTIES:
+:CUSTOM_ID: h:3154e7c8-cb91-496c-8f45-f9103761af7f
+:END:
+
+This user option enforces the specified letter casing for the given
+character.  The value is an alist.  In previous versions, the ~car~ of
+each cell was a character type, whereas now it is a string type.
+Concretely, the old value was expressed like this:
+
+#+begin_src emacs-lisp
+;; Old value
+(setq altcaps-force-character-casing
+      '((?i . downcase)
+        (?l . upcase)))
+#+end_src
+
+It becomes:
+
+#+begin_src emacs-lisp
+;; New value
+(setq altcaps-force-character-casing
+      '(("i" . downcase)
+        ("l" . upcase)))
+#+end_src
+
+At least based on my correspondence, strings are easier for users.
+The notation for characters causes confusion.
+
+** The public ~altcaps-transform~ function
+:PROPERTIES:
+:CUSTOM_ID: h:8b4aabf6-3ecb-46c5-ab28-49518e5add31
+:END:
+
+This is the function that performs the alternating letter casing, while
+also respecting the user option ~altcaps-force-character-casing~.  The
+function is more efficient now.  Use it in Lisp with a single string
+argument, like this:
+
+#+begin_src emacs-lisp
+(altcaps-transform "Your wish is my command")
+;; => yOuR wIsH iS mY cOmMaNd
+#+end_src
+
+The above return value is consistent with the default settings.  With
+~altcaps-force-character-casing~ bound, we can affect the output thus:
+
+#+begin_src emacs-lisp
+(setq altcaps-force-character-casing
+      '(("i" . downcase)
+        ("m" . upcase)))
+
+(altcaps-transform "Your wish is my command")
+;; => yOuR wiSh iS My CoMMaNd
+#+end_src
+
+** Characters without casing no longer matter
+:PROPERTIES:
+:CUSTOM_ID: h:574bbf0f-05e2-4d6c-8141-02043fb5d8f1
+:END:
+
+Before, the algorithm was toggling the letter casing of virtually
+every character.  This means that a string like ="a.c"= was wrongly
+treated as a sequence of three characters with letter casing, so the
+program was trying to do this:
+
+#+begin_src
+a => downcase
+. => upcase
+c => downcase
+#+end_src
+
+Whereas now, the transformation skips characters without letter
+casing:
+
+#+begin_src
+a => downcase
+. => i Am ThE iNtElLiGeNtSiA nOw
+c => upcase
+#+end_src
+
+** The ~altcaps-replace~ is superseded by ~altcaps-replace-region~
+:PROPERTIES:
+:CUSTOM_ID: h:712e32d5-9b9a-4eeb-b406-a2df59d00b51
+:END:
+
+The ~altcaps-replace~ was not sufficiently abstract, making the code a
+bit repetitive.  The new ~altcaps-replace-region~ is efficient in that
+regard.
+
+The arity of the two functions is different: ~altcaps-replace~ was
+accepting one required argument plus an optional one, while
+~altcaps-replace-region~ takes three arguments at all times.  Please
+consult its doc string before adapting it to your code.
+
 * 1.1.0 on 2022-11-28
 :PROPERTIES:
 :CUSTOM_ID: h:f1e70ccd-ad8d-44ee-a061-006f63ec07ef
