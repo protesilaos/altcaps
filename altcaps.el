@@ -3,9 +3,9 @@
 ;; Copyright (C) 2022-2023  Free Software Foundation, Inc.
 
 ;; Author: Protesilaos Stavrou <info@protesilaos.com>
-;; Maintainer: Altcaps Development <~protesilaos/altcaps@lists.sr.ht>
+;; Maintainer: Altcaps Development <~protesilaos/general-issues@lists.sr.ht>
 ;; URL: https://git.sr.ht/~protesilaos/altcaps
-;; Mailing-List: https://lists.sr.ht/~protesilaos/altcaps
+;; Mailing-List: https://lists.sr.ht/~protesilaos/general-issues
 ;; Version: 1.1.0
 ;; Package-Requires: ((emacs "27.1"))
 
