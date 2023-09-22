@@ -105,9 +105,9 @@ Use any of the following commands to achieve the desired results:
 #+vindex: altcaps-force-character-casing
 The user option ~altcaps-force-character-casing~ forces the given
 letter casing for specified characters.  Its value is an alist of
-=(CHARACTER . CASE)= pairs.  =CHARACTER= is a single character
-(satisfies the ~characterp~ condition), while =CASE= is the ~upcase~
-or ~downcase~ symbol (code sample further below).
+=(STRING . CASE)= pairs.  =STRING= is a string with a single
+character, while =CASE= is the ~upcase~ or ~downcase~ symbol (code
+sample further below).
 
 The idea is to always render certain characters in lower or upper
 case, in consideration of their legibility in context.  For example,
@@ -124,8 +124,8 @@ The code to do this:
 
 #+begin_src emacs-lisp
 (setq altcaps-force-character-casing
-      '((?i . downcase)
-        (?l . upcase)))
+      '(("i" . downcase)
+        ("l" . upcase)))
 #+end_src
 
 * Installation
@@ -192,8 +192,8 @@ Everything is in place to set up the package.
 
 ;; Force letter casing for certain characters (for legibility).
 (setq altcaps-force-character-casing
-      '((?i . downcase)
-        (?l . upcase)))
+      '(("i" . downcase)
+        ("l" . upcase)))
 
 ;; We do not bind any keys, but you are free to do so:
 (define-key global-map (kbd "C-x C-a") #'altcaps-dwim)

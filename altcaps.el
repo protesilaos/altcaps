@@ -101,9 +101,9 @@ communication.  Plus, you appear more sophisticated.  tRuSt Me."
   :group 'editing)
 
 (defcustom altcaps-force-character-casing nil
-  "Force the given letter casing for specified characters.
-This is an alist of (CHARACTER . CASE).  CHARACTER must satisfy
-`characterp', while CASE is the symbol `upcase' or `downcase'.
+  "Force the given letter casing for specified single character strings.
+This is an alist of (STRING . CASE).  STRING must satisfy
+`stringp', while CASE is the symbol `upcase' or `downcase'.
 
 The idea is to always render certain characters in lower or upper
 case, in consideration of their legibility in context.  For
@@ -121,10 +121,11 @@ You do want to communicate mockery or sarcasm, though legibility
 still matters!  (Regardless, I encourage everyone to use a decent
 font that disambiguates characters.)"
   :type '(alist
-          :key-type (character :tag "Single character")
+          :key-type (string :tag "Single character string")
           :value-type (radio :tag "Letter casing"
                              (const :tag "Lower case" downcase)
                              (const :tag "Upper case" upcase)))
+  :package-version '(altcaps . "1.2.0")
   :group 'altcaps)
 
 (defun altcaps-transform (string)
