@@ -1,6 +1,6 @@
 ;;; altcaps.el --- Apply alternating letter casing to convey sarcasm or mockery -*- lexical-binding: t -*-
 
-;; Copyright (C) 2022-2023  Free Software Foundation, Inc.
+;; Copyright (C) 2022-2024  Free Software Foundation, Inc.
 
 ;; Author: Protesilaos Stavrou <info@protesilaos.com>
 ;; Maintainer: Altcaps Development <~protesilaos/general-issues@lists.sr.ht>
