@@ -137,7 +137,7 @@ Respect the preferred casing for characters in the user option
     (mapc (lambda (c)
             (when (string-match-p "[[:alpha:]]" c)
               (cond
-               ((when-let ((force-case (alist-get c altcaps-force-character-casing nil nil #'equal)))
+               ((when-let* ((force-case (alist-get c altcaps-force-character-casing nil nil #'equal)))
                   (setq c (funcall force-case c)
                         casing force-case)))
                ((eq casing 'downcase)
