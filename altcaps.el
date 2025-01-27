@@ -131,24 +131,23 @@ font that disambiguates characters.)"
   "Make STRING use alternating letter casing, ignoring blanks.
 Respect the preferred casing for characters in the user option
 `altcaps-force-character-casing'."
-  (let ((s (split-string (downcase string) ""))
-        casing
-        chars)
-    (mapc (lambda (c)
-            (when (string-match-p "[[:alpha:]]" c)
-              (cond
-               ((when-let* ((force-case (alist-get c altcaps-force-character-casing nil nil #'equal)))
-                  (setq c (funcall force-case c)
-                        casing force-case)))
-               ((eq casing 'downcase)
-                (setq c (upcase c)
-                      casing 'upcase))
-               (t
-                (setq c (downcase c)
-                      casing 'downcase))))
-            (push c chars))
-          s)
-    (apply #'concat (nreverse chars))))
+  (let ((characters (split-string (downcase string) ""))
+        (casing nil)
+        (processed-characters nil))
+    (dolist (character characters)
+      (when (string-match-p "[[:alpha:]]" character)
+        (cond
+         ((when-let* ((force-case (alist-get character altcaps-force-character-casing nil nil #'equal)))
+            (setq character (funcall force-case character)
+                  casing force-case)))
+         ((eq casing 'downcase)
+          (setq character (upcase character)
+                casing 'upcase))
+         (t
+          (setq character (downcase character)
+                casing 'downcase))))
+      (push character processed-characters))
+    (apply #'concat (nreverse processed-characters))))
 
 (defun altcaps-replace-region (beginning end string)
   "Replace region between BEGINNING and END with STRING.
