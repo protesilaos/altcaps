@@ -180,10 +180,7 @@ Alternating letter casing denotes sarcasm or mockery."
          (end (save-excursion (forward-word n) (point)))
          (original-word (buffer-substring-no-properties beginning end)))
     (unless (string-blank-p original-word)
-      (altcaps-replace-region
-       (min beginning end)
-       (max beginning end)
-       original-word))))
+      (altcaps-replace-region (min beginning end) (max beginning end) original-word))))
 
 ;;;###autoload
 (defun altcaps-region (beg end)
