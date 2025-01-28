@@ -135,21 +135,18 @@ Respect the preferred casing for characters in the user option
         (casing nil)
         (processed-characters nil))
     (dolist (character characters)
-      (let ((alpha-p (string-match-p "[[:alpha:]]" character)))
+      (when (string-match-p "[[:alpha:]]" character)
         (cond
-         ((when-let* (alpha-p
-                      (force-case (alist-get character altcaps-force-character-casing nil nil #'equal)))
+         ((when-let* ((force-case (alist-get character altcaps-force-character-casing nil nil #'equal)))
             (setq character (funcall force-case character)
                   casing force-case)))
-         ((and alpha-p (eq casing 'downcase))
+         ((eq casing 'downcase)
           (setq character (upcase character)
                 casing 'upcase))
-         (alpha-p
-          (setq character (downcase character)
-                casing 'downcase))
          (t
-          (setq casing nil)))
-        (push character processed-characters)))
+          (setq character (downcase character)
+                casing 'downcase))))
+        (push character processed-characters))
     (apply #'concat (nreverse processed-characters))))
 
 (defun altcaps-replace-region (beginning end string)
