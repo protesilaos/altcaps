@@ -204,6 +204,20 @@ Everything is in place to set up the package.
 ;; - `altcaps-dwim'
 #+end_src
 
+With ~use-package~:
+
+#+begin_src emacs-lisp
+(use-package altcaps
+  :ensure t
+  :bind
+  ("C-x C-a" . altcaps-dwim)
+  :config
+  ;; Optionally force letter casing for certain characters (for legibility).
+  (setq altcaps-force-character-casing
+      '(("i" . downcase)
+        ("l" . upcase))))
+#+end_src
+
 * Acknowledgements
 :PROPERTIES:
 :CUSTOM_ID: h:399afb8b-7bb3-40b4-b10f-3123714d9614
