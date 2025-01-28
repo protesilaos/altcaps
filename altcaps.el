@@ -193,7 +193,7 @@ invoke `altcaps-word' with optional NUM, per that
 command's functionality (read its doc string).
 
 Alternating letter casing denotes sarcasm or mockery."
-  (interactive "P")
+  (interactive "p")
   (if (use-region-p)
       (altcaps-region (region-beginning) (region-end))
     (altcaps-word num)))
