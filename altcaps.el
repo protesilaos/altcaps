@@ -194,7 +194,7 @@ command's functionality (read its doc string).
 
 Alternating letter casing denotes sarcasm or mockery."
   (interactive "p")
-  (if (use-region-p)
+  (if (region-active-p)
       (altcaps-region (region-beginning) (region-end))
     (altcaps-word num)))
 
