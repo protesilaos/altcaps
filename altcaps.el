@@ -164,17 +164,12 @@ STRING is processed with `altcaps-transform'."
 
 With optional NUM as a numeric prefix argument, operate on NUM
 words forward, defaulting to 1.  If NUM is negative, do so
-backward.  When NUM is a negative prefix without a number, it is
-interpreted as -1.
+backward.
 
 Alternating letter casing denotes sarcasm or mockery."
-  (interactive "P")
-  (let* ((n (cond
-             ((integerp num) num)
-             ((eq num '-) -1)
-             (t 1)))
-         (beginning (point))
-         (end (save-excursion (forward-word n) (point)))
+  (interactive "p")
+  (let* ((beginning (point))
+         (end (save-excursion (forward-word num) (point)))
          (original-word (buffer-substring-no-properties beginning end)))
     (unless (string-blank-p original-word)
       (altcaps-replace-region (min beginning end) (max beginning end) original-word))))
