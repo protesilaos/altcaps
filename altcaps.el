@@ -5,7 +5,7 @@
 ;; Author: Protesilaos Stavrou <info@protesilaos.com>
 ;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
 ;; URL: https://github.com/protesilaos/altcaps
-;; Version: 1.2.0
+;; Version: 1.3.0
 ;; Package-Requires: ((emacs "27.1"))
 
 ;; This file is NOT part of GNU Emacs.

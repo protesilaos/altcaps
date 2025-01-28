@@ -9,6 +9,27 @@ project's main git repository: <https://github.com/protesilaos/altcaps>.
 The newest release is at the top.  For further details, please consult
 the manual: <https://protesilaos.com/emacs/altcaps>.
 
+* 1.3.0 on 2025-01-28
+:PROPERTIES:
+:CUSTOM_ID: h:20f36910-7ef8-4e39-954d-3ef599a08b21
+:END:
+
+This version does not include any user-facing changes. I made some
+internal refinements and ensured everything works as expected. Just
+use the sample configuration to get started:
+
+#+begin_src emacs-lisp
+(use-package altcaps
+  :ensure t
+  :bind
+  ("C-x C-a" . altcaps-dwim)
+  :config
+  ;; Optionally force letter casing for certain characters (for legibility).
+  (setq altcaps-force-character-casing
+      '(("i" . downcase)
+        ("l" . upcase))))
+#+end_src
+
 * 1.2.0 on 2023-09-22
 :PROPERTIES:
 :CUSTOM_ID: h:f6bf4cd9-0942-4536-92bc-6117cd5d57d9
