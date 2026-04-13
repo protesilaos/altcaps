@@ -208,7 +208,7 @@ Alternating letter casing denotes sarcasm or mockery."
   "Convert to alternating letter casing Do-What-I-Mean style.
 With an active region, call `altcaps-region'.  Else
 invoke `altcaps-word' with optional NUM, per that
-command's functionality (read its doc string).
+command's functionality (read its docstring).
 
 Alternating letter casing denotes sarcasm or mockery."
   (interactive "p")
